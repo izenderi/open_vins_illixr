@@ -546,6 +546,7 @@ void VioManager::do_feature_propagate_update(double timestamp) {
 
 #ifndef NDEBUG
     // Timing information
+    printf(BLUE "<RTEN>: Ziliang Modified OpenVINS \n" RESET, time_track);
     printf(BLUE "[TIME]: %.4f ms for tracking\n" RESET, time_track);
     printf(BLUE "[TIME]: %.4f ms for propagation\n" RESET, time_prop);
     printf(BLUE "[TIME]: %.4f ms for MSCKF update (%d features)\n" RESET, time_msckf, (int)featsup_MSCKF.size());
