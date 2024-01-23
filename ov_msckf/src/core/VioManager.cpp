@@ -546,7 +546,7 @@ void VioManager::do_feature_propagate_update(double timestamp) {
 
 #ifndef NDEBUG
     // Timing information
-    printf(BLUE "<RTEN> OpenVINS : start %.4f end %.4f \n" RESET, rT1, rT7);
+    printf(BLUE "<RTEN> OpenVINS : start %.4f end %.4f \n" RESET, rT1.total_microseconds() * 1e-3, rT7.total_microseconds() * 1e-3);
     printf(BLUE "[TIME]: %.4f ms for tracking\n" RESET, time_track);
     printf(BLUE "[TIME]: %.4f ms for propagation\n" RESET, time_prop);
     printf(BLUE "[TIME]: %.4f ms for MSCKF update (%d features)\n" RESET, time_msckf, (int)featsup_MSCKF.size());
