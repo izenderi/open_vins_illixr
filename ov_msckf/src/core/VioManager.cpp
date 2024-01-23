@@ -556,8 +556,7 @@ void VioManager::do_feature_propagate_update(double timestamp) {
 
 #ifndef NDEBUG
     // Timing information
-    char buf[40];
-    sprintf(buf, "<RTEN> OpenVINS : start %02ld:%02ld:%02ld.%03ld \n", hours, minutes, seconds, milliseconds);
+    printf(BLUE "<RTEN> OpenVINS : start %02ld:%02ld:%02ld.%03ld \n" RESET, hours, minutes, seconds, milliseconds);
     
     printf(BLUE "[TIME]: %.4f ms for tracking\n" RESET, time_track);
     printf(BLUE "[TIME]: %.4f ms for propagation\n" RESET, time_prop);
