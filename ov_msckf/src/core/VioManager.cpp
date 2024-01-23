@@ -530,6 +530,16 @@ void VioManager::do_feature_propagate_update(double timestamp) {
     }
     rT7 =  boost::posix_time::microsec_clock::local_time();
 
+// <RTEN>
+    const boost::posix_time::time_duration td_rT1 = rT1.time_of_day();
+    const boost::posix_time::time_duration td_rT7 = rT7.time_of_day();
+
+    const long hours        = td_rT1.hours();
+    const long minutes      = td_rT1.minutes();
+    const long seconds      = td_rT1.seconds();
+    const long milliseconds = td_rT1.total_milliseconds() -
+                              ((hours * 3600 + minutes * 60 + seconds) * 1000);
+// <RTEN/>
 
     //===================================================================================
     // Debug info, and stats tracking
@@ -546,7 +556,9 @@ void VioManager::do_feature_propagate_update(double timestamp) {
 
 #ifndef NDEBUG
     // Timing information
-    printf(BLUE "<RTEN> OpenVINS : start %.4f end %.4f \n" RESET, rT1.total_microseconds() * 1e-3, rT7.total_microseconds() * 1e-3);
+    char[40] buf[40];
+    sprintf(buf, "<RTEN> OpenVINS : start %02ld:%02ld:%02ld.%03ld \n", hours, minutes, seconds, milliseconds);
+    
     printf(BLUE "[TIME]: %.4f ms for tracking\n" RESET, time_track);
     printf(BLUE "[TIME]: %.4f ms for propagation\n" RESET, time_prop);
     printf(BLUE "[TIME]: %.4f ms for MSCKF update (%d features)\n" RESET, time_msckf, (int)featsup_MSCKF.size());
