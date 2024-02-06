@@ -7,3 +7,5 @@ doxgen_generated
 *.so
 
 .DS_Store
+
+.vscode

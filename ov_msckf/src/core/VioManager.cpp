@@ -18,6 +18,11 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
+// <RTEN>
+#include <chrono>
+#include <thread>
+// <RTEN/>
+
 #include "VioManager.h"
 #include "types/Landmark.h"
 
@@ -528,11 +533,14 @@ void VioManager::do_feature_propagate_update(double timestamp) {
             trackARUCO->set_calibration(cameranew_calib, cameranew_fisheye, true);
         }
     }
-    rT7 =  boost::posix_time::microsec_clock::local_time();
-
 // <RTEN>
+
+    std::this_thread::sleep_for(std::chrono::milliseconds(10)); // manual sleep to control load
+
+    rT7 =  boost::posix_time::microsec_clock::local_time(); // original rT7 signal end
+
     const boost::posix_time::time_duration td_rT1 = rT1.time_of_day();
-    const boost::posix_time::time_duration td_rT7 = rT7.time_of_day();
+    // const boost::posix_time::time_duration td_rT7 = rT7.time_of_day();
 
     const long hours        = td_rT1.hours();
     const long minutes      = td_rT1.minutes();
