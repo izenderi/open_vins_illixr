@@ -535,7 +535,7 @@ void VioManager::do_feature_propagate_update(double timestamp) {
     }
 // <RTEN>
 
-    std::this_thread::sleep_for(std::chrono::milliseconds(4)); // manual sleep to control load
+    std::this_thread::sleep_for(std::chrono::milliseconds(5)); // manual sleep to control load
 
     rT7 =  boost::posix_time::microsec_clock::local_time(); // original rT7 signal end
 
