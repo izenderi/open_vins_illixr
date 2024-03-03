@@ -21,6 +21,7 @@
 // <RTEN>
 #include <chrono>
 #include <thread>
+#include <unistd.h> // getpid()
 // <RTEN/>
 
 #include "VioManager.h"
@@ -37,6 +38,7 @@ VioManager::VioManager(VioManagerOptions& params_) {
     #ifndef NDEBUG
         printf("=======================================\n");
         printf("OPENVINS ON-MANIFOLD EKF IS STARTING\n");
+        printf("PID: %d\n", getpid());
         printf("=======================================\n");
     #endif
 
