@@ -310,7 +310,7 @@ bool VioManager::try_to_initialize() {
 void VioManager::do_feature_propagate_update(double timestamp) {
 
 // <RTEN>
-if vio_count++%100 = 0
+if (vio_count++ % 100 == 0)
 {
 // <RTEN/>
     //===================================================================================
