@@ -309,7 +309,7 @@ bool VioManager::try_to_initialize() {
 
 void VioManager::do_feature_propagate_update(double timestamp) {
 
-if(vio_count++%3 == 0)
+if(vio_count++%4 == 0)
 {
 
 
