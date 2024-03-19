@@ -225,7 +225,7 @@ namespace ov_msckf {
         double sim_distance_threshold = 1.0;
 
         /// Frequency (Hz) that we will simulate our cameras
-        double sim_freq_cam = 10.0;
+        double sim_freq_cam = 30.0;
 
         /// Frequency (Hz) that we will simulate our inertial measurement unit
         double sim_freq_imu = 400.0;
