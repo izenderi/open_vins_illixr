@@ -280,6 +280,10 @@ namespace ov_msckf {
         // Startup time of the filter
         double startup_time = -1;
 
+        // <RTEN>
+        size_t vio_count = 0;
+        // </RTEN>
+
 
     };
 

@@ -309,6 +309,9 @@ bool VioManager::try_to_initialize() {
 
 void VioManager::do_feature_propagate_update(double timestamp) {
 
+if(vio_count++%10 == 0)
+{
+
 
     //===================================================================================
     // State propagation, and clone augmentation
@@ -659,6 +662,8 @@ void VioManager::do_feature_propagate_update(double timestamp) {
         }
     }
 #endif
+
+} // end of if(vio_count++%10 == 0)
 
 }
 
