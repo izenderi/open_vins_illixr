@@ -145,7 +145,7 @@ namespace ov_core {
 
         // <RTEN> Change the win_size as the patch size for KLT tracking
         // How many pyramid levels to track on and the window size to reduce by
-        int pyr_levels = 3;
+        int pyr_levels = 1;
         cv::Size win_size = cv::Size(3, 3);
         // </RTEN>
 
