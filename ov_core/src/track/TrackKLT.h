@@ -143,9 +143,11 @@ namespace ov_core {
         // Minimum pixel distance to be "far away enough" to be a different extracted feature
         int min_px_dist;
 
+        // <RTEN> Change the win_size as the patch size for KLT tracking
         // How many pyramid levels to track on and the window size to reduce by
         int pyr_levels = 3;
-        cv::Size win_size = cv::Size(15, 15);
+        cv::Size win_size = cv::Size(50, 50);
+        // </RTEN>
 
         // Last set of image pyramids
         std::map<size_t, std::vector<cv::Mat>> img_pyramid_last;
