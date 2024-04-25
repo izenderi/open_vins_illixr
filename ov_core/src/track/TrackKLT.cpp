@@ -134,8 +134,8 @@ void TrackKLT::feed_stereo(double timestamp, cv::Mat &img_leftin, cv::Mat &img_r
 
     // corp the img_leftin and img_rightin to half size
     cv::Mat img_left, img_right;
-    cv::resize(img_leftin, img_left, cv::Size(img_leftin.cols/2, img_leftin.rows/2));
-    cv::resize(img_rightin, img_right, cv::Size(img_rightin.cols/2, img_rightin.rows/2));
+    cv::resize(img_leftin, img_leftin, cv::Size(img_leftin.cols/2, img_leftin.rows/2));
+    cv::resize(img_rightin, img_rightin, cv::Size(img_rightin.cols/2, img_rightin.rows/2));
 
     // Start timing
     rT1 =  boost::posix_time::microsec_clock::local_time();
