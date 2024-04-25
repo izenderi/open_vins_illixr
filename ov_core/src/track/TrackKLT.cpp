@@ -27,7 +27,7 @@ using namespace ov_core;
 void TrackKLT::feed_monocular(double timestamp, cv::Mat &img, size_t cam_id) {
 
     // corp the image to half size
-    cv::resize(img, img, cv::Size(img.cols/2, img.rows/2));
+    cv::resize(img, img, cv::Size(img.cols/10, img.rows/10));
 
     // Start timing
     rT1 =  boost::posix_time::microsec_clock::local_time();
