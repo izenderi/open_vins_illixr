@@ -133,6 +133,7 @@ void TrackKLT::feed_monocular(double timestamp, cv::Mat &img, size_t cam_id) {
 void TrackKLT::feed_stereo(double timestamp, cv::Mat &img_leftin, cv::Mat &img_rightin, size_t cam_id_left, size_t cam_id_right) {
 
     // corp the img_leftin and img_rightin to half size
+    cv::Mat img_left, img_right;
     cv::resize(img_leftin, img_left, cv::Size(img_leftin.cols/2, img_leftin.rows/2));
     cv::resize(img_rightin, img_right, cv::Size(img_rightin.cols/2, img_rightin.rows/2));
 
@@ -143,7 +144,6 @@ void TrackKLT::feed_stereo(double timestamp, cv::Mat &img_leftin, cv::Mat &img_r
     std::unique_lock<std::mutex> lck1(mtx_feeds.at(cam_id_left));
     std::unique_lock<std::mutex> lck2(mtx_feeds.at(cam_id_right));
 
-    cv::Mat img_left, img_right;
 #ifdef ILLIXR_INTEGRATION
     // Histogram equalize
     std::thread t_lhe = std::thread(cv::equalizeHist, cv::_InputArray(img_leftin ), cv::_OutputArray(img_left ));
