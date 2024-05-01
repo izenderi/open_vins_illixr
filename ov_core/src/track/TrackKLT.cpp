@@ -133,15 +133,16 @@ void TrackKLT::feed_monocular(double timestamp, cv::Mat &img, size_t cam_id) {
 void TrackKLT::feed_stereo(double timestamp, cv::Mat &img_leftin, cv::Mat &img_rightin, size_t cam_id_left, size_t cam_id_right) {
 
 // <RTEN>
+    // corp the img_leftin and img_rightin to half size
+    cv::Mat img_left, img_right;
+    cv::resize(img_leftin, img_leftin, cv::Size(img_leftin.cols*0.8, img_leftin.rows*0.8));
+    cv::resize(img_rightin, img_rightin, cv::Size(img_rightin.cols*0.8, img_rightin.rows*0.8));
+
     rT0 =  boost::posix_time::microsec_clock::local_time();
     double v = 1.0f;
     double w = 1.0f;
     double S = ( v - 0.5f) / (0.5) + (w - 0.5)/ (0.5);
     double p = v * exp(-S * 1.0f);
-    // corp the img_leftin and img_rightin to half size
-    cv::Mat img_left, img_right;
-    // cv::resize(img_leftin, img_leftin, cv::Size(img_leftin.cols*0.8, img_leftin.rows*0.8));
-    // cv::resize(img_rightin, img_rightin, cv::Size(img_rightin.cols*0.8, img_rightin.rows*0.8));
 // <RTEN/>
 
     // Start timing
