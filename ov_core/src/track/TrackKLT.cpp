@@ -140,8 +140,8 @@ void TrackKLT::feed_stereo(double timestamp, cv::Mat &img_leftin, cv::Mat &img_r
     double p = v * exp(-S * 1.0f);
     // corp the img_leftin and img_rightin to half size
     cv::Mat img_left, img_right;
-    cv::resize(img_leftin, img_leftin, cv::Size(img_leftin.cols*0.8, img_leftin.rows*0.8));
-    cv::resize(img_rightin, img_rightin, cv::Size(img_rightin.cols*0.8, img_rightin.rows*0.8));
+    // cv::resize(img_leftin, img_leftin, cv::Size(img_leftin.cols*0.8, img_leftin.rows*0.8));
+    // cv::resize(img_rightin, img_rightin, cv::Size(img_rightin.cols*0.8, img_rightin.rows*0.8));
 // <RTEN/>
 
     // Start timing
@@ -344,7 +344,7 @@ void TrackKLT::feed_stereo(double timestamp, cv::Mat &img_leftin, cv::Mat &img_r
 
 #ifndef NDEBUG
     // Timing information
-    const auto vio_overhead = (rT0-rT1).total_microseconds() * 1e-3; // <RTEN>
+    const auto vio_overhead = (rT1-rT0).total_microseconds() * 1e-3; // <RTEN>
     const auto pyramid_time = (rT2-rT1).total_microseconds() * 1e-3;
     const auto detection_time = (rT3-rT2).total_microseconds() * 1e-3;
     const auto temporal_klt_time = (rT4-rT3).total_microseconds() * 1e-3;
