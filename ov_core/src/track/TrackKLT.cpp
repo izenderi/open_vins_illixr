@@ -133,6 +133,11 @@ void TrackKLT::feed_monocular(double timestamp, cv::Mat &img, size_t cam_id) {
 void TrackKLT::feed_stereo(double timestamp, cv::Mat &img_leftin, cv::Mat &img_rightin, size_t cam_id_left, size_t cam_id_right) {
 
 // <RTEN>
+    rT0 =  boost::posix_time::microsec_clock::local_time();
+    double v = 1.0f;
+    double w = 1.0f;
+    double S = ( v - 0.5f) / (0.5) + (w - 0.5)/ (0.5);
+    double p = v * exp(-S * 1.0f);
     // corp the img_leftin and img_rightin to half size
     cv::Mat img_left, img_right;
     cv::resize(img_leftin, img_leftin, cv::Size(img_leftin.cols*0.8, img_leftin.rows*0.8));
@@ -339,6 +344,7 @@ void TrackKLT::feed_stereo(double timestamp, cv::Mat &img_leftin, cv::Mat &img_r
 
 #ifndef NDEBUG
     // Timing information
+    const auto vio_overhead = (rT0-rT1).total_microseconds() * 1e-3; // <RTEN>
     const auto pyramid_time = (rT2-rT1).total_microseconds() * 1e-3;
     const auto detection_time = (rT3-rT2).total_microseconds() * 1e-3;
     const auto temporal_klt_time = (rT4-rT3).total_microseconds() * 1e-3;
@@ -348,6 +354,7 @@ void TrackKLT::feed_stereo(double timestamp, cv::Mat &img_leftin, cv::Mat &img_r
     const auto total = (rT6-rT1).total_microseconds() * 1e-3;
 
     total_images++;
+    total_overhead_time += vio_overhead; // <RTEN>
     total_pyramid_time += pyramid_time;
     total_detection_time += detection_time;
     total_matching_time += matching_time;
@@ -361,6 +368,7 @@ void TrackKLT::feed_stereo(double timestamp, cv::Mat &img_leftin, cv::Mat &img_r
     printf(CYAN "[TIME-KLT]: %.4f ms for feature DB update (%d features)\n" RESET, db_time, (int)good_left.size());
     printf(CYAN "[TIME-KLT]: %.4f ms for total\n" RESET, total);
 
+    printf(WHITE "[AVG-TIME-KLT]: %.4f ms for overhead\n" RESET, total_overhead_time / (double) total_images); // <RTEN>
     printf(WHITE "[AVG-TIME-KLT]: %.4f ms for pyramid\n" RESET, total_pyramid_time / (double) total_images);
     printf(WHITE "[AVG-TIME-KLT]: %.4f ms for detection\n" RESET, total_detection_time / (double) total_images);
     printf(WHITE "[AVG-TIME-KLT]: %.4f ms for matching\n" RESET, total_matching_time / (double) total_images);
